@@ -1,6 +1,6 @@
 Class {
 	#name : #RZProjectRequirement,
-	#superclass : #Object,
+	#superclass : #RZScopedEntity,
 	#instVars : [
 		'name',
 		'scope',

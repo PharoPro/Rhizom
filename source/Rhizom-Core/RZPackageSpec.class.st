@@ -2,7 +2,8 @@ Class {
 	#name : #RZPackageSpec,
 	#superclass : #Object,
 	#instVars : [
-		'name'
+		'name',
+		'requires'
 	],
 	#category : #'Rhizom-Core'
 }
@@ -16,4 +17,9 @@ RZPackageSpec >> name: aString [
 RZPackageSpec >> printOn: aStream [
 
 	aStream << 'PackageSpec:' << name
+]
+
+{ #category : #'as yet unclassified' }
+RZPackageSpec >> requires: aCollection [ 
+	requires := aCollection
 ]
