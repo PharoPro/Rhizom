@@ -6,7 +6,7 @@ Class {
 		'scope',
 		'version'
 	],
-	#category : #'Rhizom-Metacello'
+	#category : #'Rhizom-Core'
 }
 
 { #category : #accessing }

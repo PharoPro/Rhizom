@@ -1,7 +1,7 @@
 Class {
 	#name : #RZCurrentScope,
 	#superclass : #DynamicVariable,
-	#category : #'Rhizom-Metacello'
+	#category : #'Rhizom-Core'
 }
 
 { #category : #accessing }

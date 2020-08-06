@@ -10,18 +10,18 @@ MCModel2MTModelVisitor new
 	withVersion: (ConfigurationOfVersionner project version: #development)
 "
 Class {
-	#name : #PVConfigurationSpecAdapter,
+	#name : #RZConfigurationSpecAdapter,
 	#superclass : #RZMetacelloSpecAdapter,
 	#category : #'Rhizom-Metacello'
 }
 
 { #category : #accessing }
-PVConfigurationSpecAdapter >> description [
+RZConfigurationSpecAdapter >> description [
 	^ description
 ]
 
 { #category : #visiting }
-PVConfigurationSpecAdapter >> visitConfiguration: aConfigurationClass withVersion: aVersion [
+RZConfigurationSpecAdapter >> visitConfiguration: aConfigurationClass withVersion: aVersion [
 	"visits a Configuration class for the specified version and returns the project root object.
 	 Returns the project root object or nil if the given version is nil."
 
@@ -33,7 +33,7 @@ PVConfigurationSpecAdapter >> visitConfiguration: aConfigurationClass withVersio
 ]
 
 { #category : #visiting }
-PVConfigurationSpecAdapter >> visitMCGroup: aGroup [
+RZConfigurationSpecAdapter >> visitMCGroup: aGroup [
 	"visit a Metacello Group"	
 	"| group |
 
@@ -46,7 +46,7 @@ PVConfigurationSpecAdapter >> visitMCGroup: aGroup [
 ]
 
 { #category : #visiting }
-PVConfigurationSpecAdapter >> visitMCPackage: aPackage [
+RZConfigurationSpecAdapter >> visitMCPackage: aPackage [
 	"visit a Metacello Package"
 
 	"| package version |
@@ -66,7 +66,7 @@ PVConfigurationSpecAdapter >> visitMCPackage: aPackage [
 ]
 
 { #category : #visiting }
-PVConfigurationSpecAdapter >> visitMCProjectAsRequiredProject: aProject [
+RZConfigurationSpecAdapter >> visitMCProjectAsRequiredProject: aProject [
 	"visit a Metacello Project to add it as a required projet. It is quite the same as visitMCProject except that we won't dive into the project structure.
 	aProject is an instance of MetacelloMCProjectSpec."
 	| requiredProject repos |
@@ -81,7 +81,7 @@ PVConfigurationSpecAdapter >> visitMCProjectAsRequiredProject: aProject [
 ]
 
 { #category : #visiting }
-PVConfigurationSpecAdapter >> visitMCVersion: aVersion [
+RZConfigurationSpecAdapter >> visitMCVersion: aVersion [
 	"visit a Metacello Version"
 	
 	| groups packages projects repositories |

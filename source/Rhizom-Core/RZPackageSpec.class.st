@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'name'
 	],
-	#category : #'Rhizom-Metacello'
+	#category : #'Rhizom-Core'
 }
 
 { #category : #'as yet unclassified' }
