@@ -95,11 +95,6 @@ RZBaselineSpecAdapter >> loads: parts [
 		ifFalse: [ parts ])
 ]
 
-{ #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> newScope [
-	^ RZScopedBaselineSpec new
-]
-
 { #category : #visiting }
 RZBaselineSpecAdapter >> newScopeWith: attribute [
 	^ self currentScope newScopeWith: attribute
@@ -194,13 +189,6 @@ RZBaselineSpecAdapter >> requirements [
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> requires: aCollection [ 
 	currentRequirement requires: aCollection
-]
-
-{ #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> scopeAt: aString [ 
-	^ self scopes
-		at: aString 
-		ifAbsentPut: [ self newScope ]
 ]
 
 { #category : #'as yet unclassified' }
