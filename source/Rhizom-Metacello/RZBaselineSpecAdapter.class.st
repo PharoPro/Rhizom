@@ -160,7 +160,7 @@ RZBaselineSpecAdapter >> projectRequirementFor: aString [
 
 { #category : #visiting }
 RZBaselineSpecAdapter >> repository: aRepositoryUrlString [
-	currentRequirement repository: aRepositoryUrlString 
+	currentRequirement repositoryUrlString: aRepositoryUrlString 
 ]
 
 { #category : #'as yet unclassified' }

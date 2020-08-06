@@ -39,5 +39,11 @@ RZBaselineProjectRequirement >> printOn: aStream [
 
 { #category : #'as yet unclassified' }
 RZBaselineProjectRequirement >> repository: aString [ 
+	self halt.
 	repository := aString
+]
+
+{ #category : #'as yet unclassified' }
+RZBaselineProjectRequirement >> repositoryUrlString: aString [ 
+	repository := RZUrlHandler urlFromString: aString
 ]
