@@ -9,6 +9,11 @@ Class {
 	#category : #'Rhizom-Core'
 }
 
+{ #category : #printing }
+RZProjectRequirement >> printOn: aStream [
+	aStream << 'project requirement: ' << name asString
+]
+
 { #category : #accessing }
 RZProjectRequirement >> scope [
 	^ scope

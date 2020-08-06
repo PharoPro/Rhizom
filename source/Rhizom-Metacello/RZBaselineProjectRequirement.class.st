@@ -24,9 +24,17 @@ RZBaselineProjectRequirement >> name: aString [
 	name := aString
 ]
 
+{ #category : #copying }
+RZBaselineProjectRequirement >> postCopy [ 
+	repository := repository copy.
+	loads := loads copy
+]
+
 { #category : #printing }
 RZBaselineProjectRequirement >> printOn: aStream [
-	aStream << 'requires: ' << (name ifNil: ['N/A']) << '(' << ($, join: loads) << ')'
+	aStream << 'requires: ' << (name ifNil: ['N/A']) << '(' << ($, join: loads) << ')' << ' {'.
+	scope printOn: aStream.
+	aStream << '}'
 ]
 
 { #category : #'as yet unclassified' }

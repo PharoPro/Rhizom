@@ -7,7 +7,6 @@ Class {
 	#name : #RZBaselineSpecAdapter,
 	#superclass : #RZMetacelloSpecAdapter,
 	#instVars : [
-		'projectDependencyProperties',
 		'project',
 		'currentRequirement',
 		'packages',
@@ -144,13 +143,6 @@ RZBaselineSpecAdapter >> project: aString copyFrom: other with: aBlockClosure [
 { #category : #visiting }
 RZBaselineSpecAdapter >> project: aName with: aBlockClosure [ 
 	self halt.
-	projectDependencyProperties := Dictionary with: 'version' -> 'stable'.
-	aBlockClosure value.
-	description addDependency: (
-		self 
-			newVersionString: (projectDependencyProperties at: 'version') 
-			repositoryUrl: (projectDependencyProperties at: 'repository') 
-			name: aName )
 ]
 
 { #category : #accessing }
@@ -199,7 +191,6 @@ RZBaselineSpecAdapter >> version: aString [
 
 { #category : #visiting }
 RZBaselineSpecAdapter >> versionString: aString [ 
-	
 	currentRequirement
 		version: aString
 ]

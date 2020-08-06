@@ -11,3 +11,9 @@ Class {
 RZPackageSpec >> name: aString [ 
 	name := aString
 ]
+
+{ #category : #printing }
+RZPackageSpec >> printOn: aStream [
+
+	aStream << 'PackageSpec:' << name
+]
