@@ -6,3 +6,8 @@ Class {
 	],
 	#category : #'Rhizom-Metacello'
 }
+
+{ #category : #'as yet unclassified' }
+RZPackageSpec >> name: aString [ 
+	name := aString
+]
