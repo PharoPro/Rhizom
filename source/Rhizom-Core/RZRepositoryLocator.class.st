@@ -1,7 +1,7 @@
 Class {
 	#name : #RZRepositoryLocator,
 	#superclass : #Object,
-	#category : #'Rhizom-Core'
+	#category : #'Rhizom-Core-Repository'
 }
 
 { #category : #testing }

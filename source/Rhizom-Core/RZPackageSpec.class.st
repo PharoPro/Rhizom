@@ -1,12 +1,18 @@
 Class {
 	#name : #RZPackageSpec,
-	#superclass : #Object,
+	#superclass : #RZScopedEntity,
 	#instVars : [
 		'name',
 		'requires'
 	],
-	#category : #'Rhizom-Core'
+	#category : #'Rhizom-Core-Model'
 }
+
+{ #category : #'as yet unclassified' }
+RZPackageSpec class >> named: aString [ 
+	^ self new
+		name: aString
+]
 
 { #category : #'as yet unclassified' }
 RZPackageSpec >> name: aString [ 

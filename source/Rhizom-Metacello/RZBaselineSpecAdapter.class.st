@@ -9,17 +9,11 @@ Class {
 	#instVars : [
 		'project',
 		'currentRequirement',
-		'packages',
 		'requirements',
 		'views'
 	],
 	#category : #'Rhizom-Metacello'
 }
-
-{ #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> addPackage: aRZBaselinePackageSpec [ 
-	packages add: aRZBaselinePackageSpec 
-]
 
 { #category : #visiting }
 RZBaselineSpecAdapter >> baseline: aName with: aBlockClosure [ 
@@ -83,13 +77,12 @@ RZBaselineSpecAdapter >> import: spec [
 RZBaselineSpecAdapter >> initialize [ 
 	super initialize.
 	requirements := Dictionary new.
-	packages := Set new.
 	views := Dictionary new.
 ]
 
 { #category : #visiting }
 RZBaselineSpecAdapter >> loads: parts [ 
-	currentRequirement loads: (parts isString 
+	currentRequirement views: (parts isString 
 		ifTrue: [ Array with: parts ]
 		ifFalse: [ parts ])
 ]
@@ -101,15 +94,16 @@ RZBaselineSpecAdapter >> newScopeWith: attribute [
 
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> package: aString [ 
-	self addPackage: aString
+	project 
+		addPackage: (RZPackageSpec named: aString)
 ]
 
 { #category : #visiting }
 RZBaselineSpecAdapter >> package: aName with: aBlockClosure [ 
-	currentRequirement := RZBaselinePackageSpec new
+	currentRequirement := RZPackageSpec new
 		name: aName.
 	[ aBlockClosure value.
-		self 
+		project 
 			addPackage: currentRequirement ]
 		ensure: [ currentRequirement := nil ].
 
@@ -153,7 +147,7 @@ RZBaselineSpecAdapter >> projectName: aString [
 
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> projectRequirementFor: aString [
-	^ RZBaselineProjectRequirement new
+	^ RZProjectRequirement new
 		scope: self currentScope;
 		name: aString
 ]

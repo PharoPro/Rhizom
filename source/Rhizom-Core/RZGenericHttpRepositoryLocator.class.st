@@ -1,7 +1,7 @@
 Class {
 	#name : #RZGenericHttpRepositoryLocator,
 	#superclass : #RZHttpRepositoryLocator,
-	#category : #'Rhizom-Core'
+	#category : #'Rhizom-Core-Repository'
 }
 
 { #category : #'as yet unclassified' }

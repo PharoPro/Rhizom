@@ -3,28 +3,47 @@ Class {
 	#superclass : #RZScopedEntity,
 	#instVars : [
 		'name',
-		'scope',
-		'version'
+		'version',
+		'repository',
+		'views'
 	],
-	#category : #'Rhizom-Core'
+	#category : #'Rhizom-Core-Model'
 }
+
+{ #category : #'as yet unclassified' }
+RZProjectRequirement >> name: aString [ 
+	name := aString
+]
+
+{ #category : #copying }
+RZProjectRequirement >> postCopy [ 
+	repository := repository copy.
+	views := views copy
+]
 
 { #category : #printing }
 RZProjectRequirement >> printOn: aStream [
-	aStream << 'project requirement: ' << name asString
+	aStream << 'requires: ' << (name ifNil: ['N/A']) << '(' << ($, join: views) << ')' << ' {'.
+	scope printOn: aStream.
+	aStream << '}'
 ]
 
-{ #category : #accessing }
-RZProjectRequirement >> scope [
-	^ scope
-]
-
-{ #category : #accessing }
-RZProjectRequirement >> scope: anObject [
-	scope := anObject
+{ #category : #'as yet unclassified' }
+RZProjectRequirement >> repositoryUrlString: aString [ 
+	repository := RZRepositoryLocator urlFromString: aString
 ]
 
 { #category : #'as yet unclassified' }
 RZProjectRequirement >> version: aString [ 
 	version := aString
+]
+
+{ #category : #accessing }
+RZProjectRequirement >> views [
+	^ views
+]
+
+{ #category : #accessing }
+RZProjectRequirement >> views: anObject [
+	views := anObject
 ]

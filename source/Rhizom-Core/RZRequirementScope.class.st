@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'attributes'
 	],
-	#category : #'Rhizom-Core'
+	#category : #'Rhizom-Core-Model'
 }
 
 { #category : #'as yet unclassified' }

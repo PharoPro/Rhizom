@@ -1,5 +1,18 @@
 Class {
 	#name : #RZScopedEntity,
 	#superclass : #Object,
-	#category : #'Rhizom-Core'
+	#instVars : [
+		'scope'
+	],
+	#category : #'Rhizom-Core-Model'
 }
+
+{ #category : #accessing }
+RZScopedEntity >> scope [
+	^ scope
+]
+
+{ #category : #accessing }
+RZScopedEntity >> scope: anObject [
+	scope := anObject
+]

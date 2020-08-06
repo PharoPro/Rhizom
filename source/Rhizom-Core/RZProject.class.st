@@ -2,15 +2,28 @@ Class {
 	#name : #RZProject,
 	#superclass : #Object,
 	#instVars : [
-		'name'
+		'name',
+		'packages'
 	],
-	#category : #'Rhizom-Core'
+	#category : #'Rhizom-Core-Model'
 }
 
 { #category : #'as yet unclassified' }
 RZProject class >> named: aString [ 
 	^ self new
 		name: aString
+]
+
+{ #category : #'as yet unclassified' }
+RZProject >> addPackage: aRZPackageSpec [ 
+	packages add: aRZPackageSpec 
+]
+
+{ #category : #initialization }
+RZProject >> initialize [ 
+	super initialize.
+	packages := Set new.
+
 ]
 
 { #category : #'as yet unclassified' }

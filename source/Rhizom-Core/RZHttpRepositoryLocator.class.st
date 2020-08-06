@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'url'
 	],
-	#category : #'Rhizom-Core'
+	#category : #'Rhizom-Core-Repository'
 }
 
 { #category : #'as yet unclassified' }

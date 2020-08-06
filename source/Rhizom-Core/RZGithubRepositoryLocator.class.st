@@ -7,7 +7,7 @@ Class {
 		'project',
 		'version'
 	],
-	#category : #'Rhizom-Core'
+	#category : #'Rhizom-Core-Repository'
 }
 
 { #category : #'as yet unclassified' }
