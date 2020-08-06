@@ -1,28 +1,28 @@
 Class {
-	#name : #RZGithubUrlHandler,
-	#superclass : #RZUrlHandler,
+	#name : #RZGithubRepositoryLocator,
+	#superclass : #RZRepositoryLocator,
 	#instVars : [
 		'ownerName',
 		'directory',
 		'project',
 		'version'
 	],
-	#category : #'Rhizom-Metacello'
+	#category : #'Rhizom-Core'
 }
 
 { #category : #'as yet unclassified' }
-RZGithubUrlHandler class >> fromString: aString [ 
+RZGithubRepositoryLocator class >> fromString: aString [ 
 	^ self new
 		initializeFrom: aString
 ]
 
 { #category : #'as yet unclassified' }
-RZGithubUrlHandler class >> schemeName [
+RZGithubRepositoryLocator class >> schemeName [
 	^ #github
 ]
 
 { #category : #'as yet unclassified' }
-RZGithubUrlHandler >> initializeFrom: aString [
+RZGithubRepositoryLocator >> initializeFrom: aString [
 	| stream projectReference |
 	stream := aString readStream.
 	"skip (http|https)//"
@@ -36,4 +36,14 @@ RZGithubUrlHandler >> initializeFrom: aString [
 	version := (projectReference size > 1)
 		ifTrue: [ projectReference second ]
 		ifFalse: [ #default ]
+]
+
+{ #category : #printing }
+RZGithubRepositoryLocator >> printOn: aStream [
+	aStream << 'github://' << ownerName << '/' << project.
+	version ifNotNil: [ 
+		aStream << ':' << version ].
+	aStream << '/'.
+	directory ifNotNil: [ 
+		aStream << directory  ]
 ]

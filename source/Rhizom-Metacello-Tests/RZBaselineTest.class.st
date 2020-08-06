@@ -11,5 +11,6 @@ RZBaselineTest >> testRead [
 	baseline := BaselineOfIceberg new.
 	(baseline respondsTo: #baseline:) ifFalse: [ Error signal: baselinePackage name asString, ' does not have basline: method' ].
 	adapter process: baseline.
-	self assert: adapter requirements size equals: 7
+	self assert: adapter requirements size equals: 7.
+	self halt.
 ]

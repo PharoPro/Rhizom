@@ -22,7 +22,7 @@ RZMetacelloSpecAdapter >> description [
 { #category : #initialization }
 RZMetacelloSpecAdapter >> initialize [ 
 	super initialize.
-	description := PVVersionDescription new
+	
 ]
 
 { #category : #'instance creation' }

@@ -45,5 +45,5 @@ RZBaselineProjectRequirement >> repository: aString [
 
 { #category : #'as yet unclassified' }
 RZBaselineProjectRequirement >> repositoryUrlString: aString [ 
-	repository := RZUrlHandler urlFromString: aString
+	repository := RZRepositoryLocator urlFromString: aString
 ]

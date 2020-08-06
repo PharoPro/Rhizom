@@ -1,16 +1,16 @@
 Class {
-	#name : #RZUrlHandler,
+	#name : #RZRepositoryLocator,
 	#superclass : #Object,
-	#category : #'Rhizom-Metacello'
+	#category : #'Rhizom-Core'
 }
 
 { #category : #testing }
-RZUrlHandler class >> matchesScheme: aString [
+RZRepositoryLocator class >> matchesScheme: aString [
 	^ self schemeName = aString
 ]
 
 { #category : #'as yet unclassified' }
-RZUrlHandler class >> urlFromString: aString [ 
+RZRepositoryLocator class >> urlFromString: aString [ 
 	| stream scheme handlerClass |
 	scheme := aString readStream upTo: $:.
 	handlerClass := self allSubclasses 
