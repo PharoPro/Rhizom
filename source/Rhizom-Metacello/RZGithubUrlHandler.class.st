@@ -37,3 +37,13 @@ RZGithubUrlHandler >> initializeFrom: aString [
 		ifTrue: [ projectReference second ]
 		ifFalse: [ #default ]
 ]
+
+{ #category : #printing }
+RZGithubUrlHandler >> printOn: aStream [
+	aStream << 'github://' << ownerName << '/' << project.
+	version ifNotNil: [ 
+		aStream << ':' << version  ].
+	directory 
+		ifNotNil: [ aStream << directory  ]
+		ifNil: [  aStream << '/' ]
+]

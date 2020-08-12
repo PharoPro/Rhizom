@@ -8,17 +8,14 @@ Class {
 	#superclass : #RZMetacelloSpecAdapter,
 	#instVars : [
 		'project',
-		'currentRequirement',
-		'packages',
-		'requirements',
-		'views'
+		'currentRequirement'
 	],
 	#category : #'Rhizom-Metacello'
 }
 
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> addPackage: aRZBaselinePackageSpec [ 
-	packages add: aRZBaselinePackageSpec 
+	project addPackage: aRZBaselinePackageSpec 
 ]
 
 { #category : #visiting }
@@ -79,14 +76,6 @@ RZBaselineSpecAdapter >> import: spec [
 	"ignore"
 ]
 
-{ #category : #initialization }
-RZBaselineSpecAdapter >> initialize [ 
-	super initialize.
-	requirements := Dictionary new.
-	packages := Set new.
-	views := Dictionary new.
-]
-
 { #category : #visiting }
 RZBaselineSpecAdapter >> loads: parts [ 
 	currentRequirement loads: (parts isString 
@@ -101,7 +90,8 @@ RZBaselineSpecAdapter >> newScopeWith: attribute [
 
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> package: aString [ 
-	self addPackage: aString
+	self addPackage: (RZBaselinePackageSpec new
+		name: aString)
 ]
 
 { #category : #visiting }
@@ -131,6 +121,11 @@ RZBaselineSpecAdapter >> process: aBaseline [
 	projectName := aBaseline class name allButFirst: 'BaselineOf' size.
 	project := RZProject named: projectName.
 	^ aBaseline baseline: self
+]
+
+{ #category : #'as yet unclassified' }
+RZBaselineSpecAdapter >> project [
+	^ project
 ]
 
 { #category : #'as yet unclassified' }
@@ -165,17 +160,12 @@ RZBaselineSpecAdapter >> repository: aRepositoryUrlString [
 
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> requirementAt: aString [ 
-	^ requirements at: aString
+	^ project requirementAt: aString
 ]
 
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> requirementAt: aString put: aRequirement [ 
-	requirements at: aString put: aRequirement 
-]
-
-{ #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> requirements [
-	^ requirements
+	project requirementAt: aString put: aRequirement 
 ]
 
 { #category : #'as yet unclassified' }
@@ -197,7 +187,6 @@ RZBaselineSpecAdapter >> versionString: aString [
 
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> viewAt: aString put: aCollection [ 
-	views 
-		at: aString 
-		put: aCollection
+	project viewAt: aString put: aCollection 
+
 ]
