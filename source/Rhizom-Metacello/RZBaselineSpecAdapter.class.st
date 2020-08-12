@@ -8,12 +8,15 @@ Class {
 	#superclass : #RZMetacelloSpecAdapter,
 	#instVars : [
 		'project',
-		'currentRequirement',
-		'requirements',
-		'views'
+		'currentRequirement'
 	],
 	#category : #'Rhizom-Metacello'
 }
+
+{ #category : #'as yet unclassified' }
+RZBaselineSpecAdapter >> addPackage: aRZBaselinePackageSpec [ 
+	project addPackage: aRZBaselinePackageSpec 
+]
 
 { #category : #visiting }
 RZBaselineSpecAdapter >> baseline: aName with: aBlockClosure [ 
@@ -73,13 +76,6 @@ RZBaselineSpecAdapter >> import: spec [
 	"ignore"
 ]
 
-{ #category : #initialization }
-RZBaselineSpecAdapter >> initialize [ 
-	super initialize.
-	requirements := Dictionary new.
-	views := Dictionary new.
-]
-
 { #category : #visiting }
 RZBaselineSpecAdapter >> loads: parts [ 
 	currentRequirement views: (parts isString 
@@ -128,6 +124,11 @@ RZBaselineSpecAdapter >> process: aBaseline [
 ]
 
 { #category : #'as yet unclassified' }
+RZBaselineSpecAdapter >> project [
+	^ project
+]
+
+{ #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> project: aString copyFrom: other with: aBlockClosure [ 
 	| projectRequirement |
 	projectRequirement := (self requirementAt: other) copy name: aString.
@@ -159,17 +160,12 @@ RZBaselineSpecAdapter >> repository: aRepositoryUrlString [
 
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> requirementAt: aString [ 
-	^ requirements at: aString
+	^ project requirementAt: aString
 ]
 
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> requirementAt: aString put: aRequirement [ 
-	requirements at: aString put: aRequirement 
-]
-
-{ #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> requirements [
-	^ requirements
+	project requirementAt: aString put: aRequirement 
 ]
 
 { #category : #'as yet unclassified' }
@@ -191,7 +187,6 @@ RZBaselineSpecAdapter >> versionString: aString [
 
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> viewAt: aString put: aCollection [ 
-	views 
-		at: aString 
-		put: aCollection
+	project viewAt: aString put: aCollection 
+
 ]

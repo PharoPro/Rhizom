@@ -23,7 +23,8 @@ RZProject >> addPackage: aRZPackageSpec [
 RZProject >> initialize [ 
 	super initialize.
 	packages := Set new.
-
+	views := Dictionary new.
+	requirements := Dictionary new.
 ]
 
 { #category : #'as yet unclassified' }
@@ -35,4 +36,26 @@ RZProject >> name: aString [
 RZProject >> printOn: aStream [
 
 	aStream << 'Project: ' << name
+]
+
+{ #category : #accessing }
+RZProject >> requirementAt: aString [ 
+	^ requirements at: aString
+]
+
+{ #category : #accessing }
+RZProject >> requirementAt: aString put: aRequirement [ 
+	requirements at: aString put: aRequirement 
+]
+
+{ #category : #'as yet unclassified' }
+RZProject >> requirements [
+	^ requirements
+]
+
+{ #category : #accessing }
+RZProject >> viewAt: aString put: aCollection [ 
+	views 
+		at: aString 
+		put: aCollection
 ]
