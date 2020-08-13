@@ -26,8 +26,8 @@ RZConfigurationSpecAdapter >> visitConfiguration: aConfigurationClass withVersio
 	 Returns the project root object or nil if the given version is nil."
 
 	aVersion ifNil: [ ^ nil ].
-	description versionString: aVersion versionString.
-	description projectName: (aConfigurationClass name copyFrom: 16 to: aConfigurationClass name size). 
+	"description versionString: aVersion versionString.
+	description projectName: (aConfigurationClass name copyFrom: 16 to: aConfigurationClass name size). "
 	self visitMCVersion: aVersion.
 	
 ]
@@ -101,7 +101,7 @@ RZConfigurationSpecAdapter >> visitMCVersion: aVersion [
 	projects do:  [ :aProject | self visitMCProjectAsRequiredProject: aProject ].
 	
 	repositories := aVersion spec repositories list.
-	repositories ifNotEmpty:  
-		[:repo | description url: repo first name ].
+	"repositories ifNotEmpty:  
+		[:repo | description url: repo first name ]."
 
 ]

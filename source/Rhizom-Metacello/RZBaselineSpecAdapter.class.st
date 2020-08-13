@@ -13,19 +13,11 @@ Class {
 	#category : #'Rhizom-Metacello'
 }
 
-{ #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> addPackage: aRZBaselinePackageSpec [ 
-	project addPackage: aRZBaselinePackageSpec 
-]
-
 { #category : #visiting }
-RZBaselineSpecAdapter >> baseline: aName with: aBlockClosure [ 
-	currentRequirement := self projectRequirementFor: aName.
-	[ aBlockClosure value.
-		self 
-			requirementAt: aName 
-			put: currentRequirement ]
-		ensure: [ currentRequirement := nil ].
+RZBaselineSpecAdapter >> baseline: aString with: aBlock [
+	self 
+		gitProjectRequirementFor: aString
+		with: aBlock
 
 ]
 
@@ -36,18 +28,14 @@ RZBaselineSpecAdapter >> blessing: aString [
 
 { #category : #visiting }
 RZBaselineSpecAdapter >> className: aString [ 
-	"class name of the ConfigurationOf
-	ignored for now."
+	currentRequirement className: aString
 ]
 
 { #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> configuration: aString with: aBlockClosure [ 
-	currentRequirement := self projectRequirementFor: aString.
-	[ aBlockClosure value.
-		self 
-			requirementAt: aString 
-			put: currentRequirement ]
-		ensure: [ currentRequirement := nil ].
+RZBaselineSpecAdapter >> configuration: aString with: aBlock [
+	self 
+		httpProjectRequirementFor: aString
+		with: aBlock
 
 ]
 
@@ -64,11 +52,47 @@ RZBaselineSpecAdapter >> for: attribute do: aBlockClosure [
 	
 ]
 
+{ #category : #'as yet unclassified' }
+RZBaselineSpecAdapter >> gitProjectRequirementFor: aString [
+	^ RZBaselineProjectRequirement new
+		scope: self currentScope;
+		name: aString
+]
+
+{ #category : #'as yet unclassified' }
+RZBaselineSpecAdapter >> gitProjectRequirementFor: aString with: aBlock [
+	currentRequirement := self gitProjectRequirementFor: aString.
+	[ aBlock value.
+		project   
+			requirementAt: aString 
+			put: currentRequirement ]
+		ensure: [ currentRequirement := nil ].
+
+]
+
 { #category : #visiting }
 RZBaselineSpecAdapter >> group: aName with: aCollection [
-	self
+	project
 		viewAt: aName 
 		put: aCollection
+]
+
+{ #category : #'as yet unclassified' }
+RZBaselineSpecAdapter >> httpProjectRequirementFor: aString [
+	^ RZConfigurationProjectRequirement new
+		scope: self currentScope;
+		name: aString
+]
+
+{ #category : #'as yet unclassified' }
+RZBaselineSpecAdapter >> httpProjectRequirementFor: aString with: aBlock [
+	currentRequirement := self httpProjectRequirementFor: aString.
+	[ aBlock value.
+		project   
+			requirementAt: aString 
+			put: currentRequirement ]
+		ensure: [ currentRequirement := nil ].
+
 ]
 
 { #category : #api }
@@ -131,13 +155,15 @@ RZBaselineSpecAdapter >> project [
 { #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> project: aString copyFrom: other with: aBlockClosure [ 
 	| projectRequirement |
-	projectRequirement := (self requirementAt: other) copy name: aString.
+	projectRequirement := (project requirementAt: other) copy name: aString.
 	
 ]
 
 { #category : #visiting }
-RZBaselineSpecAdapter >> project: aName with: aBlockClosure [ 
-	self halt.
+RZBaselineSpecAdapter >> project: aString with: aBlock [
+	self 
+		httpProjectRequirementFor: aString
+		with: aBlock 
 ]
 
 { #category : #accessing }
@@ -146,26 +172,9 @@ RZBaselineSpecAdapter >> projectName: aString [
 	description projectName: aString
 ]
 
-{ #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> projectRequirementFor: aString [
-	^ RZProjectRequirement new
-		scope: self currentScope;
-		name: aString
-]
-
 { #category : #visiting }
 RZBaselineSpecAdapter >> repository: aRepositoryUrlString [
 	currentRequirement repositoryUrlString: aRepositoryUrlString 
-]
-
-{ #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> requirementAt: aString [ 
-	^ project requirementAt: aString
-]
-
-{ #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> requirementAt: aString put: aRequirement [ 
-	project requirementAt: aString put: aRequirement 
 ]
 
 { #category : #'as yet unclassified' }
@@ -182,11 +191,5 @@ RZBaselineSpecAdapter >> version: aString [
 { #category : #visiting }
 RZBaselineSpecAdapter >> versionString: aString [ 
 	currentRequirement
-		version: aString
-]
-
-{ #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> viewAt: aString put: aCollection [ 
-	project viewAt: aString put: aCollection 
-
+		versionString: aString
 ]

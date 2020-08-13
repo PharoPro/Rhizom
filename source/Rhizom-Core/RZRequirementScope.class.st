@@ -12,6 +12,13 @@ RZRequirementScope >> addAttribute: aString [
 	attributes add: aString
 ]
 
+{ #category : #'as yet unclassified' }
+RZRequirementScope >> includes: aString [
+	| s |
+	s := ((attributes includes: 'MacOS') | (attributes includes: 'Unix') | (attributes includes: 'pharo8.x') | (attributes includes: 'common')) & (attributes includes: 'Windows') not.
+	^s
+]
+
 { #category : #initialization }
 RZRequirementScope >> initialize [ 
 	super initialize.
