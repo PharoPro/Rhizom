@@ -2,7 +2,7 @@ Class {
 	#name : #RZMetacelloSpecAdapter,
 	#superclass : #Object,
 	#instVars : [
-		'description'
+		'project'
 	],
 	#category : #'Rhizom-Metacello'
 }
@@ -13,25 +13,16 @@ RZMetacelloSpecAdapter >> currentScope [
 	^ RZCurrentScope value
 ]
 
-{ #category : #accessing }
-RZMetacelloSpecAdapter >> description [
-	self halt.
-	^ description
+{ #category : #visiting }
+RZMetacelloSpecAdapter >> group: aName with: aCollection [
+	project
+		viewAt: aName 
+		put: aCollection
 ]
 
-{ #category : #initialization }
-RZMetacelloSpecAdapter >> initialize [ 
-	super initialize.
-	
-]
-
-{ #category : #'instance creation' }
-RZMetacelloSpecAdapter >> newVersionString: versionString repositoryUrl: repositoryUrl name: name [
-self halt.
-	^ PVVersionDependency new 
-		projectName: name;
-		url: repositoryUrl;
-		versionString: versionString 
+{ #category : #'as yet unclassified' }
+RZMetacelloSpecAdapter >> project [
+	^ project
 ]
 
 { #category : #enumerating }

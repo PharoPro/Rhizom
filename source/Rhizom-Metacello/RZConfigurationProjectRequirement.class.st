@@ -20,7 +20,7 @@ RZConfigurationProjectRequirement >> createRZProject [
 	configurationClass := self class environment at: configurationName.
 	metacelloVersion := configurationClass project version: #stable.
 	^ RZConfigurationSpecAdapter new
-		visitConfiguration: configurationClass  new withVersion: metacelloVersion;
+		visitConfiguration: configurationClass  withVersion: metacelloVersion;
 		project
 ]
 

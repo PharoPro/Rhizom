@@ -15,9 +15,10 @@ Class {
 	#category : #'Rhizom-Metacello'
 }
 
-{ #category : #accessing }
-RZConfigurationSpecAdapter >> description [
-	^ description
+{ #category : #initialization }
+RZConfigurationSpecAdapter >> initialize [ 
+	super initialize.
+	project := RZProject new
 ]
 
 { #category : #visiting }
@@ -26,43 +27,27 @@ RZConfigurationSpecAdapter >> visitConfiguration: aConfigurationClass withVersio
 	 Returns the project root object or nil if the given version is nil."
 
 	aVersion ifNil: [ ^ nil ].
-	"description versionString: aVersion versionString.
-	description projectName: (aConfigurationClass name copyFrom: 16 to: aConfigurationClass name size). "
+	"project version: aVersion versionString."
+	project name: (aConfigurationClass name copyFrom: 16 to: aConfigurationClass name size).
 	self visitMCVersion: aVersion.
-	
 ]
 
 { #category : #visiting }
 RZConfigurationSpecAdapter >> visitMCGroup: aGroup [
-	"visit a Metacello Group"	
-	"| group |
-
-	group := PBAssembly new.
-	group name: aGroup name.
-	project addDependency: group.
-	^ group.
-	"
-	^ aGroup 
+	self group: aGroup name with: aGroup includes
 ]
 
 { #category : #visiting }
 RZConfigurationSpecAdapter >> visitMCPackage: aPackage [
-	"visit a Metacello Package"
+	| package |
+	package := RZConfigurationOfPackageSpec new.
+	aPackage includes notEmpty ifTrue: [ self halt ].
+	aPackage requires notEmpty ifTrue: [ self halt ].
 
-	"| package version |
-	
-	package := MTPackage new.
-	package name: aPackage name.
-	
-	version := PBVersion fromVersionName: aPackage file.
-	package version: version.
-	
-	package dependencies: aPackage requires asOrderedCollection.
-	
-	project addDependency: package.
-	^ package."
-	^ aPackage
-
+	package 
+		name: aPackage name;
+		file: aPackage file.
+	project addPackage: package
 ]
 
 { #category : #visiting }
@@ -77,7 +62,8 @@ RZConfigurationSpecAdapter >> visitMCProjectAsRequiredProject: aProject [
 	requiredProject versionString: (aProject versionString 
 		ifNotNil: [ aProject versionString ]
 		ifNil: [ (SourceRepositoryUrl fromString: repos first) branch ]).
-	description addDependency: requiredProject 
+	self halt.
+	"description addDependency: requiredProject "
 ]
 
 { #category : #visiting }

@@ -7,7 +7,6 @@ Class {
 	#name : #RZBaselineSpecAdapter,
 	#superclass : #RZMetacelloSpecAdapter,
 	#instVars : [
-		'project',
 		'currentRequirement'
 	],
 	#category : #'Rhizom-Metacello'
@@ -68,13 +67,6 @@ RZBaselineSpecAdapter >> gitProjectRequirementFor: aString with: aBlock [
 			put: currentRequirement ]
 		ensure: [ currentRequirement := nil ].
 
-]
-
-{ #category : #visiting }
-RZBaselineSpecAdapter >> group: aName with: aCollection [
-	project
-		viewAt: aName 
-		put: aCollection
 ]
 
 { #category : #'as yet unclassified' }
@@ -148,11 +140,6 @@ RZBaselineSpecAdapter >> process: aBaseline [
 ]
 
 { #category : #'as yet unclassified' }
-RZBaselineSpecAdapter >> project [
-	^ project
-]
-
-{ #category : #'as yet unclassified' }
 RZBaselineSpecAdapter >> project: aString copyFrom: other with: aBlockClosure [ 
 	| projectRequirement |
 	projectRequirement := (project requirementAt: other) copy name: aString.
@@ -169,7 +156,7 @@ RZBaselineSpecAdapter >> project: aString with: aBlock [
 { #category : #accessing }
 RZBaselineSpecAdapter >> projectName: aString [ 
 	self halt.
-	description projectName: aString
+
 ]
 
 { #category : #visiting }
