@@ -94,7 +94,7 @@ RZBaselineSpecAdapter >> import: spec [
 
 { #category : #visiting }
 RZBaselineSpecAdapter >> loads: parts [ 
-	currentRequirement views: (parts isString 
+	currentRequirement view: (parts isString 
 		ifTrue: [ Array with: parts ]
 		ifFalse: [ parts ])
 ]
@@ -178,5 +178,5 @@ RZBaselineSpecAdapter >> version: aString [
 { #category : #visiting }
 RZBaselineSpecAdapter >> versionString: aString [ 
 	currentRequirement
-		versionString: aString
+		version: aString
 ]

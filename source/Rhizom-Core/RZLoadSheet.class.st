@@ -3,6 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'projects',
+		'unresolved',
 		'requirements'
 	],
 	#category : #'Rhizom-Core'
@@ -24,7 +25,17 @@ RZLoadSheet >> buildFor: aProject [
 RZLoadSheet >> initialize [ 
 	super initialize.
 	projects := Set new.
-	requirements := OrderedCollection new
+	unresolved := OrderedCollection new.
+	requirements := Dictionary new
+]
+
+{ #category : #'as yet unclassified' }
+RZLoadSheet >> load [
+	| loadOrder |
+	loadOrder := projects sorted: [ :a :b | b dependsOn: a ].
+	loadOrder do: [ :each |
+		(each name = 'ProcessWrapper') ifFalse: [  
+		self halt. ]]
 ]
 
 { #category : #'as yet unclassified' }
@@ -55,17 +66,31 @@ RZLoadSheet >> loadRequirement: aProjectRequirement [
 
 { #category : #'as yet unclassified' }
 RZLoadSheet >> resolveProject: aRZProject [ 
-	requirements addAll: aRZProject requirements
+	| slot list |
+	aRZProject requirements do: [ :each |
+		(requirements includesKey: each name) ifFalse: [ 
+			unresolved add: each ].
+		slot := requirements at: each name ifAbsentPut: [ Dictionary new ].
+		list := slot at: each version ifAbsentPut: [ OrderedCollection new ].
+		list add: aRZProject
+		 ]
 ]
 
 { #category : #running }
 RZLoadSheet >> run [
 	| requirement project |
-	[ requirements isEmpty ] whileFalse: [ 
-		requirement := requirements removeFirst.
+	[ unresolved isEmpty ] whileFalse: [ 
+		requirement := unresolved removeFirst.
 		requirement load.
 		project := requirement createRZProject.
 		projects add: project.
 		self resolveProject: project.
 		 ].
+]
+
+{ #category : #'as yet unclassified' }
+RZLoadSheet >> solveVersionConflicts [
+	requirements keysAndValuesDo: [ :projectName :versions |
+		(versions keys size > 1) ifTrue: [ 
+			self halt ] ]
 ]

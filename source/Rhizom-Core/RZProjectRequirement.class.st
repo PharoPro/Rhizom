@@ -5,7 +5,7 @@ Class {
 		'name',
 		'version',
 		'repository',
-		'views'
+		'view'
 	],
 	#category : #'Rhizom-Core-Model'
 }
@@ -23,14 +23,14 @@ RZProjectRequirement >> name: aString [
 { #category : #copying }
 RZProjectRequirement >> postCopy [ 
 	repository := repository copy. 
-	views := views copy
+	view := view copy
 ]
 
 { #category : #printing }
 RZProjectRequirement >> printOn: aStream [
 	aStream << 'requires: ' << (name ifNil: ['N/A']) .
-	views ifNotNil: [  
-		aStream << '(' << ($, join: views) << ')' ].
+	view ifNotNil: [  
+		aStream << '(' << ($, join: view) << ')' ].
 	aStream << ' {'.
 	scope printOn: aStream.
 	aStream << '}' 
@@ -58,11 +58,6 @@ RZProjectRequirement >> version: aString [
 ]
 
 { #category : #accessing }
-RZProjectRequirement >> views [
-	^ views 
-]
-
-{ #category : #accessing }
-RZProjectRequirement >> views: anObject [
-	views := anObject 
+RZProjectRequirement >> view: anObject [
+	view := anObject 
 ]

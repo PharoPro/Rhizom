@@ -9,9 +9,10 @@ RZBaselineTest >> testRead [
 	| project sheet |
 	project := BaselineOfIceberg new asRhizomProject.
 	self assert: project requirements size equals: 7.
+	self halt.
 	sheet := RZLoadSheet new buildFor: project.
-	"sheet addProject: project.
-	sheet loadAllProjects."
+	sheet solveVersionConflicts.
+	sheet load.
 	self halt.
 ]
 

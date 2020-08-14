@@ -18,7 +18,7 @@ Class {
 { #category : #initialization }
 RZConfigurationSpecAdapter >> initialize [ 
 	super initialize.
-	project := RZProject new
+	project := RZConfigurationOfProject  new
 ]
 
 { #category : #visiting }
@@ -27,7 +27,7 @@ RZConfigurationSpecAdapter >> visitConfiguration: aConfigurationClass withVersio
 	 Returns the project root object or nil if the given version is nil."
 
 	aVersion ifNil: [ ^ nil ].
-	"project version: aVersion versionString."
+	project version: aVersion versionString.
 	project name: (aConfigurationClass name copyFrom: 16 to: aConfigurationClass name size).
 	self visitMCVersion: aVersion.
 ]

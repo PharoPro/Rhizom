@@ -30,6 +30,12 @@ RZConfigurationProjectRequirement >> load [
 ]
 
 { #category : #'as yet unclassified' }
+RZConfigurationProjectRequirement >> version [
+	^ version
+]
+
+{ #category : #'as yet unclassified' }
 RZConfigurationProjectRequirement >> versionString: aString [ 
+	self halt.
 	versionString := aString
 ]

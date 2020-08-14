@@ -32,12 +32,24 @@ RZProject >> asScoped: aCollection [
 	^ scoped
 ]
 
+{ #category : #'as yet unclassified' }
+RZProject >> dependsOn: aRZProject [ 
+	((self name = 'Iceberg') & (aRZProject name = 'ProcessWrapper')) ifTrue: [ 
+		self halt ].
+	^ requirements anySatisfy: [ :each | each name = aRZProject name ]
+]
+
 { #category : #initialization }
 RZProject >> initialize [ 
 	super initialize.
 	packages := Set new.
 	views := Dictionary new.
 	requirements := Dictionary new. 
+]
+
+{ #category : #'as yet unclassified' }
+RZProject >> name [
+	^ name
 ]
 
 { #category : #'as yet unclassified' }

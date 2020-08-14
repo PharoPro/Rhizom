@@ -16,3 +16,8 @@ RZBaselineProjectRequirement >> createRZProject [
 RZBaselineProjectRequirement >> load [
 	repository loadRequirement: self
 ]
+
+{ #category : #'as yet unclassified' }
+RZBaselineProjectRequirement >> version [
+	^ repository version
+]
