@@ -5,6 +5,27 @@ Class {
 }
 
 { #category : #tests }
+RZBaselineTest >> testPakbotRead [
+	| project |
+	project := PBBaselineVisitor new  
+		baseline: BaselineOfIceberg new;
+		project.
+	self assert: project externalProjects size equals: 3.
+
+]
+
+{ #category : #tests }
+RZBaselineTest >> testPakbotSolve [
+	| project solver load |
+	project := PBBaselineVisitor new  
+		baseline: BaselineOfIceberg new;
+		project.
+	self assert: project externalProjects size equals: 3.
+	load := project resolve.
+
+]
+
+{ #category : #tests }
 RZBaselineTest >> testRead [
 	| project sheet |
 	project := BaselineOfIceberg new asRhizomProject.
